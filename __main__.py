@@ -15,7 +15,7 @@ def scan(bus_num, start=0x03, end=0x78):
     path=os.path.dirname(__file__)
     its_list=os.listdir(path)
     its_self=os.path.basename(__file__)
-    i2c_URL=path+'/sqlite.db'
+    i2c_URL=path+'/sqlite3.db'
     conn = sqlite3.connect(i2c_URL)
     
     try:
@@ -45,15 +45,15 @@ def scan(bus_num, start=0x03, end=0x78):
           val = e.args[0]
         finally:
             c = conn.cursor()
-            c.execute("SELECT * FROM its_i2cList")
+            c.execute("SELECT * FROM its_i2c")
             rows = c.fetchall() 
             #print(f"this is a comlete row--- {rows} --- ") 
                   
             if val != 5:    # No device
                 for row in rows:
                     if val == 1 :                                                 
-                        if row[1] == hex(i) and row[5] != "development_uknonwn": 
-                            if row[5] == "development" or row[5] != "development_uknonwn" :
+                        if row[1] == hex(i) and row[5] != "legacy": 
+                            if row[5] == "development" or row[5] != "legacy" :
                                 print(f'{row[1]}:\n  Found: {row[3]}\n  Type: {row[4]}\n  URL:{row[5]}\n  ')
                         
                                 
