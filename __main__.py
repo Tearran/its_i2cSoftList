@@ -15,7 +15,7 @@ def scan(bus_num, start=0x03, end=0x78):
     path=os.path.dirname(__file__)
     its_list=os.listdir(path)
     its_self=os.path.basename(__file__)
-    i2c_URL=path+'/db/sqlite.db'
+    i2c_URL=path+'/sqlite.db'
     conn = sqlite3.connect(i2c_URL)
     
     try:
