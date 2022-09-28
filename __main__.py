@@ -61,8 +61,7 @@ if __name__ == "__main__":
     else:
       if int(args[1]) != 1:
         print("Untested Bus:")
-        print("Try Default Bus:")
-        do_fetch(path)
+        print(f"Try Default Bus: 1")
         pass     
       else:
         scan(int(args[1]))
