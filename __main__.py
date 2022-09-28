@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#Copyright (c) 2022 Joseph Turner (Tearran) & contributors
 
 
 import sys, os, sqlite3
-from smbus2 import SMBus
-
 
 os.system("clear")
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+from smbus2 import SMBus
 
 def scan(bus_num, start=0x03, end=0x78):
 
@@ -49,7 +52,8 @@ def scan(bus_num, start=0x03, end=0x78):
                     #print(f"this is a comlete row--- {rows} --- ")                  
                     for row in rows:
                         if hex(i) == row[1]:
-                            print(row[1]+" "+row[3]+" "+row[5]+" "+row[6])
+                            if str(row[5]) != "development_uknonwn": 
+                                print(f'{row[1]}:\n  Found: {row[3]}\n  Type: {row[4]}\n  URL:{row[5]}\n  ')
                                                                     
     conn.close
                
@@ -61,8 +65,9 @@ if __name__ == "__main__":
     else:
       if int(args[1]) != 1:
         print("Untested Bus:")
-        print(f"Try Default Bus: 1")
+        print(f"Try Default Bus:")
         pass     
       else:
         scan(int(args[1]))
-    sys.exit()        
+    sys.exit()       
+     
