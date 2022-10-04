@@ -61,14 +61,14 @@ def scan(bus_num, datatype, start=0x03, end=0x78):
                                     report = (f'Device @ {str(row[1])}\n\tName:\t{row[3]}\n\tType:\t{row[4]}\n\tURL:\t{row[5]}\n')                                   
                                 
                                 elif datatype == "dict":
-                                    report = (f'i2c : {str(row[1])}, Name : {row[3]}, Type : {row[4]}, URL : {row[5]}')                                                        
+                                    report = (f'i2c_00 : {str(row[1])}, Name : {row[3]}, Type : {row[4]}, URL : {row[5]}')                                                        
                                 
                                 elif datatype == "csv":
                                     report = (f'{str(row[1])} , {row[3]} , {row[4]} , {row[5]}')                            
                                 
                                 else:
-                                    report = ("Usage : i2c-scanner.py <datatype>\n\t cli\n\t csv\n\t dict")                                    
-                                    print(f'{report}')
+                                    print('Unknown connamd\n\tTry: i2c-scanner.py -h')
+                                    pass
                                     sys.exit() 
                                                                 
                                 print(f'{report}')
@@ -78,14 +78,22 @@ def scan(bus_num, datatype, start=0x03, end=0x78):
 if __name__ == "__main__":
     args = sys.argv
     if len(args) < 2:
-        print("Usage : i2c-scanner.py <datatype>\n")
-             
+        scan(int(1), "csv")             
     else:
-      if args[1] == "data":
-        scan(int(1), "data")
+        if args[1] == "-h":
+            print('''
+Usage : i2c-scanner.py <datatype>
+    -h   : Displays this help
+    none : same as csv
+    csv  : Displays Comma seperated list
+    dict : Displays dictionary 
+    cli  : Displays readable     
+        ''')
+        #scan(int(1), "data")
         #print(f"Try Default Bus 1:")
-        pass     
-      else:
-        scan(int(1), args[1])
+    
+        else:
+            scan(int(1), args[1])
+            
     sys.exit()       
      
