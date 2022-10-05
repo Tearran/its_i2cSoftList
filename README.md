@@ -2,7 +2,7 @@
 I2c scanner
 
 ```bash
-suod apt update && sudo apt install git;
+sudo apt update && sudo apt install git;
 git clone https://github.com/Tearran/its_i2cSoftList
 ```
 launch
