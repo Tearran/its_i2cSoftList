@@ -92,13 +92,13 @@ if __name__ == "__main__":
             print('''
 Usage : i2c-scanner.py <datatype>
     -h   : Displays this help
+    html : Diplays html output
     none : same as csv
     csv  : Displays Comma seperated list
     dict : Displays dictionary 
     cli  : Displays readable     
         ''')
-        #scan(int(1), "data")
-        #print(f"Try Default Bus 1:")
+
         if args[1] == "html":
             print(f'''                                                                                 
 <!DOCTYPE html>
@@ -122,3 +122,4 @@ Usage : i2c-scanner.py <datatype>
             scan(int(1), args[1])
             
     sys.exit()       
+     
