@@ -64,7 +64,15 @@ def scan(bus_num, datatype, start=0x03, end=0x78):
                                     report = (f'i2c_00 : {str(row[1])}, Name : {row[3]}, Type : {row[4]}, URL : {row[5]}')                                                        
                                 
                                 elif datatype == "csv":
-                                    report = (f'{str(row[1])} , {row[3]} , {row[4]} , {row[5]}')                            
+                                    report = (f'{str(row[1])} , {row[3]} , {row[4]} , {row[5]}')
+                                
+                                elif datatype == "html":
+                                    report = (f'''
+    <tr>
+        <td>{str(row[1])}</td>
+        <td>{row[3]}</td>
+        <td> <a href="{row[5]}"> {row[3]} </a> </td>
+    </tr>''')                                                             
                                 
                                 else:
                                     print('Unknown connamd\n\tTry: i2c-scanner.py -h')
@@ -91,9 +99,26 @@ Usage : i2c-scanner.py <datatype>
         ''')
         #scan(int(1), "data")
         #print(f"Try Default Bus 1:")
-    
+        if args[1] == "html":
+            print(f'''                                                                                 
+<!DOCTYPE html>
+<html>
+<body>
+<h2>LKARS</h2>
+<table style="width:100%">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Links</th>
+  </tr>''')            
+            scan(int(1), args[1])
+            print(f'''                    
+</table>
+</body>
+</html>
+            ''') 
+              
         else:
             scan(int(1), args[1])
             
     sys.exit()       
-     
